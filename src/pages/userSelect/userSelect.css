@@ -1,0 +1,41 @@
+.userSelect {
+  background-color: black;
+  height: 100vh;
+}
+
+.userSelect__navbar {
+}
+
+.userSelect__welcome {
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 10vh;
+}
+
+.userSelect__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10vh;
+}
+
+.userSelect__navbar__logo {
+  width: 150px;
+  margin: 2em;
+}
+
+.userSelect__welcome {
+  margin-bottom: 2em;
+}
+
+.userSelect__account__img {
+  width: 7em;
+  border-radius: 0.5em;
+}
+
+.userSelect__account__img:hover {
+  border: 1.5px solid #fff;
+}
