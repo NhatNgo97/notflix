@@ -1,12 +1,16 @@
-import './App.css';
-import { BrowserView } from 'react-device-detect';
-import Main from './components/main.js';
+import "./App.css";
+import { BrowserView } from "react-device-detect";
+import Main from "./components/main.js";
+import NavBar from "./components/navBar/navBar";
 
 function App() {
   return (
     <>
       <BrowserView>
-        <Main/>
+        <div className="App">
+          <NavBar />
+          <Main />
+        </div>
       </BrowserView>
     </>
   );
