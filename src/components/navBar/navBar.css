@@ -7,4 +7,6 @@
 
 .navBar {
   background-color: black;
+  top: 0;
+  width: 100%;
 }
