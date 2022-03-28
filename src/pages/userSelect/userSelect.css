@@ -3,10 +3,11 @@
   font-size: 2rem;
   font-weight: bold;
   text-align: center;
+  margin: 0;
 }
 
 .userSelect {
-  background-color: black;
+  background-color: #141414;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,13 +17,11 @@
   position: fixed;
 }
 
-.userSelect__welcome {
-  margin-bottom: 2em;
-}
-
 .userSelect__account__img {
   width: 7em;
   border-radius: 0.5em;
+  margin-top: 1em;
+  margin-bottom: 7em;
 }
 
 .userSelect__account__img:hover {

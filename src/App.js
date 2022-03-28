@@ -7,10 +7,8 @@ function App() {
   return (
     <>
       <BrowserView>
-        <div className="App">
-          <NavBar />
-          <Main />
-        </div>
+        <NavBar />
+        <Main />
       </BrowserView>
     </>
   );
