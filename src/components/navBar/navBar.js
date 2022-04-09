@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router";
+
 import './navBar.css'
 
 function NavBar() {
