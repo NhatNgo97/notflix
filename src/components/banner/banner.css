@@ -45,19 +45,27 @@
   border-radius: 4px;
   cursor: pointer;
   border: 0;
-  padding: 5px;
-  width: 8vw;
-  min-width: 120px;
+  padding: 0.5em 1em;
+  min-width: 110px;
+  font-size: 20px;
 }
 
 .info__btn {
   background-color: rgba(109, 109, 110, 0.7);
   color: #fff;
 }
-.play_btn {
+.play__btn {
   background-color: #ffffff;
   color: #000000;
 }
+
 .btn__icon {
-  margin-right: 5px;
+  margin-right: 8px;
+}
+
+.play__btn:hover {
+  background-color: rgba(255, 255, 255, 0.685);
+}
+.info__btn:hover {
+  background-color: rgba(109, 109, 110, 0.5);
 }
