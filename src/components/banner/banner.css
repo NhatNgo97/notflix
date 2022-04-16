@@ -31,7 +31,7 @@
 }
 
 .banner__text__btns {
-  margin-top: 1em;
+  margin-top: 2em;
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -48,6 +48,7 @@
   padding: 0.5em 1em;
   min-width: 110px;
   font-size: 20px;
+  font-weight: bold;
 }
 
 .info__btn {
