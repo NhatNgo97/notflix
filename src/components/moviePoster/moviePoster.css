@@ -1,8 +1,7 @@
 .moviePoster {
-  margin-top: -5em;
-  margin-bottom: 10em;
-  width: 9vw;
-  height: 13vw;
+  width: 12vw;
+  height: 16vw;
   background-position: center;
   background-size: cover;
+  margin-right: 0.35vw;
 }

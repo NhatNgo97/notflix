@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import MoviePoster from "../moviePoster/moviePoster";
+import './movieRow.css'
 
 function MovieRow({ title, fetchUrl }) {
   const API_KEY = process.env.REACT_APP_API_KEY;
@@ -9,13 +10,20 @@ function MovieRow({ title, fetchUrl }) {
   const [movies, setMovies] = useState([{}]);
   useEffect(() => {
     axios.get(`${BASE_URL}${fetchUrl}?api_key=${API_KEY}`).then((res) => {
-      console.log(res.data.results);
       setMovies(res.data.results);
-  })}, []);
+    })
+  }, []);
 
   if (movies === undefined) return <div>LOADING</div>
-  return (<div>
-    <MoviePoster movie={movies[0]} />
+  return (<div className="movieRow">
+    <div className="movieRow__title">{title}</div>
+    <div className="movieRow__movies">
+      <MoviePoster movie={movies[0]} />
+      <MoviePoster movie={movies[0]} />
+      <MoviePoster movie={movies[0]} />
+      <MoviePoster movie={movies[0]} />
+    </div>
+
   </div>);
 }
 
