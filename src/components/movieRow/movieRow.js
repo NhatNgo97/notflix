@@ -25,9 +25,9 @@ function MovieRow({ title, fetchUrl }) {
       {
         !movies.loading ?
           (<div className="movieRow__movies">
-            <MoviePoster movie={movies.data[1]} movieId={movies.data[1].id} />
-            <MoviePoster movie={movies.data[1]} movieId={movies.data[1].id} />
-            <MoviePoster movie={movies.data[1]} movieId={movies.data[1].id} />
+            <MoviePoster movieId={movies.data[1].id} />
+            <MoviePoster movieId={movies.data[1].id} />
+            <MoviePoster movieId={movies.data[1].id} />
           </div>)
           : ([1, 2, 3, 4, 5, 6].map((n) => (
             <Skeleton sx={{ bgcolor: 'grey.900', margin: '0.4em' }} variant="rectangular" animation="wave" width={180} height={270} key={n} />)))}
