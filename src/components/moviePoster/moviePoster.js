@@ -1,6 +1,6 @@
 import requests from "../../requests";
 import "./moviePoster.css"
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow"
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
@@ -8,8 +8,13 @@ import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import ThumbDownAltOutlinedIcon from '@mui/icons-material/ThumbDownAltOutlined';
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
 import PlayCircleFilledWhiteRoundedIcon from '@mui/icons-material/PlayCircleFilledWhiteRounded';
+import styledEngine from "@mui/styled-engine";
+import AddIcon from '@mui/icons-material/Add';
 
 function MoviePoster({ movieId }) {
+  const positionRef = useRef();
+  const [x, setX] = useState();
+  const [y, setY] = useState();
   const [isHover, setIsHover] = useState(false);
   const [movieDetail, setMovieDetail] = useState({
     loading: true,
@@ -34,8 +39,19 @@ function MoviePoster({ movieId }) {
     fetchData();
   }, [])
 
+  const getPosition = () => {
+
+  };
+
+  useEffect(() => {
+    getPosition();
+  }, [])
+
   const handleMouseEnter = () => {
     setIsHover(true);
+    setX(positionRef.current.getBoundingClientRect().left);
+    setY(positionRef.current.getBoundingClientRect().top);
+    console.log(x);
   }
 
   const handleMouseLeave = () => {
@@ -47,38 +63,40 @@ function MoviePoster({ movieId }) {
     <div
       onMouseEnter={() => handleMouseEnter()}
       onMouseLeave={() => handleMouseLeave()}
-
       className="moviePoster"
+      id={movieId}
+      ref={positionRef}
     >
       <div className="moviePoster__img" style={{
         backgroundImage: `url(${requests.baseUrlImg}${movieDetail.data.backdrop_path})`
       }}>
       </div>
-      {isHover && <div className="moviePoster__detail">
-        <div className="btns">
-          <div className="btns__left">
-            <PlayCircleFilledWhiteRoundedIcon className="poster-icon-play" />
-            <AddCircleOutlineRoundedIcon className="poster-icon-add" />
-            <ThumbUpOutlinedIcon className="poster-icon-like" />
-            <ThumbDownAltOutlinedIcon className="poster-icon-like" />
+      {
+        isHover && <div className="moviePoster__detail">
+          <div className="btns">
+            <div className="btns__left">
+              <PlayArrowIcon className="poster-icon-play icon" />
+              <AddIcon className="poster-icon-add icon" />
+              <ThumbUpOutlinedIcon className="poster-icon-like icon" />
+              <ThumbDownAltOutlinedIcon className="poster-icon-like icon" />
+            </div>
+            <div className="btns__right"></div>
           </div>
-          <div className="btns__right"></div>
-        </div>
-        <div className="detail">
-          <span className="detail__rate">{movieDetail.data.vote_average}</span>
-          <span className="detail__lenght">{countRuntime(movieDetail.data.runtime)}</span>
-        </div>
-        <div >
-          <ul className="genres">
-            {movieDetail.data.genres.map(genres => (
-              <li key={genres.id}>{genres.name}</li>
-            ))}
+          <div className="detail">
+            <span className="detail__rate">{movieDetail.data.vote_average} rate</span>
+            <span className="detail__lenght">{countRuntime(movieDetail.data.runtime)}</span>
+          </div>
+          <div >
+            <ul className="genres">
+              {movieDetail.data.genres.slice(0, 3).map(genres => (
+                <li key={genres.id}>{genres.name}</li>
+              ))}
 
-          </ul>
+            </ul>
+          </div>
         </div>
-
-      </div>}
-    </div>
+      }
+    </div >
   )
 }
 
