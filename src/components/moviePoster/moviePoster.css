@@ -27,6 +27,12 @@
   border-radius: 4px 4px 0 0;
 }
 
+.btns {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .btns__left {}
 
 .moviePoster__detail {

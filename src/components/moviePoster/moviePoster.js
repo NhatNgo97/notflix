@@ -10,6 +10,7 @@ import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDown
 import PlayCircleFilledWhiteRoundedIcon from '@mui/icons-material/PlayCircleFilledWhiteRounded';
 import styledEngine from "@mui/styled-engine";
 import AddIcon from '@mui/icons-material/Add';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 function MoviePoster({ movieId }) {
   const positionRef = useRef();
@@ -80,7 +81,9 @@ function MoviePoster({ movieId }) {
               <ThumbUpOutlinedIcon className="poster-icon-like icon" />
               <ThumbDownAltOutlinedIcon className="poster-icon-like icon" />
             </div>
-            <div className="btns__right"></div>
+            <div className="btns__right">
+              <KeyboardArrowDownIcon className="poster-icon-dropdown icon" />
+            </div>
           </div>
           <div className="detail">
             <span className="detail__rate">{movieDetail.data.vote_average} rate</span>
