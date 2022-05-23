@@ -14,8 +14,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 function MoviePoster({ movieId }) {
   const positionRef = useRef();
-  const [x, setX] = useState();
-  const [y, setY] = useState();
+
   const [isHover, setIsHover] = useState(false);
   const [movieDetail, setMovieDetail] = useState({
     loading: true,
@@ -50,9 +49,6 @@ function MoviePoster({ movieId }) {
 
   const handleMouseEnter = () => {
     setIsHover(true);
-    setX(positionRef.current.getBoundingClientRect().left);
-    setY(positionRef.current.getBoundingClientRect().top);
-    console.log(x);
   }
 
   const handleMouseLeave = () => {
@@ -76,13 +72,13 @@ function MoviePoster({ movieId }) {
         isHover && <div className="moviePoster__detail">
           <div className="btns">
             <div className="btns__left">
-              <PlayArrowIcon className="poster-icon-play icon" />
-              <AddIcon className="poster-icon-add icon" />
-              <ThumbUpOutlinedIcon className="poster-icon-like icon" />
-              <ThumbDownAltOutlinedIcon className="poster-icon-like icon" />
+              <PlayArrowIcon className="poster-icon-play btnMoviePoster" />
+              <AddIcon className="poster-icon-add btnMoviePoster" />
+              <ThumbUpOutlinedIcon className="poster-icon-like btnMoviePoster" />
+              <ThumbDownAltOutlinedIcon className="poster-icon-like btnMoviePoster" />
             </div>
             <div className="btns__right">
-              <KeyboardArrowDownIcon className="poster-icon-dropdown icon" />
+              <KeyboardArrowDownIcon className="poster-icon-dropdown btnMoviePoster" />
             </div>
           </div>
           <div className="detail">

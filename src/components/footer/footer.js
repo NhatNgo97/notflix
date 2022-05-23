@@ -8,10 +8,10 @@ function Footer() {
   return (
     <div className="footer">
       <div className="footer__socials">
-        <FacebookIcon className='icon' />
-        <InstagramIcon className='icon' />
-        <TwitterIcon className='icon' />
-        <YouTubeIcon className='icon' />
+        <FacebookIcon className='iconFooter' />
+        <InstagramIcon className='iconFooter' />
+        <TwitterIcon className='iconFooter' />
+        <YouTubeIcon className='iconFooter' />
       </div>
       <div className="footer__moreInfoLinks">
         <p className='footer__moreInfoLinks__link link' >Audio Description</p>
