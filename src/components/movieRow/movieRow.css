@@ -1,0 +1,14 @@
+.movieRow {
+  margin-top: -12em;
+  margin-bottom: 12em;
+  margin-left: 4vw;
+}
+
+.movieRow__movies {
+  display: flex;
+  flex-direction: row;
+}
+
+.movieRow__title {
+  color: white;
+}

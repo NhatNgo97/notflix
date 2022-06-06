@@ -1,0 +1,18 @@
+.navBar__logo {
+  cursor: pointer;
+  width: 10vw;
+  max-width: 150px;
+  margin-left: 4vw;
+}
+
+.navBar {
+  background-color: #141414;
+  z-index: 999;
+  top: 0;
+  height: 8vw;
+  max-height: 70px;
+  width: 100%;
+  position: fixed;
+  display: flex;
+  align-items: center;
+}
