@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./banner.css";
-import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import { useWidthPartition } from "../../hooks/useWidthPartition";
 
 function Banner() {
   const API_KEY = process.env.REACT_APP_API_KEY;
@@ -13,7 +14,11 @@ function Banner() {
     axios
       .get(API_URL)
       .then((res) => {
-        setMovie(res.data.results[Math.floor(Math.random() * (res.data.results.length - 1))]);
+        setMovie(
+          res.data.results[
+            Math.floor(Math.random() * (res.data.results.length - 1))
+          ]
+        );
       })
       .catch((err) => {
         console.log(err);
@@ -35,11 +40,11 @@ function Banner() {
         </div>
         <div className="banner__text__btns">
           <button className="banner__text__btn play__btn">
-            <PlayArrowRoundedIcon className="btn__icon"/>
+            <PlayArrowRoundedIcon className="btn__icon" />
             <span>Play</span>
           </button>
           <button className="banner__text__btn info__btn">
-            <InfoOutlinedIcon className="btn__icon"/>
+            <InfoOutlinedIcon className="btn__icon" />
             <span>More Info</span>
           </button>
         </div>

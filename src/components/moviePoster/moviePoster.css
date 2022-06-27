@@ -1,21 +1,26 @@
 .moviePoster {
-  margin-right: 0.4vw;
-  width: fit-content;
-  transition: transform 300ms ease 100ms;
-  min-height: 17vw;
+  padding: 0px 0.05vw;
+  transition: transform 400ms ease-in-out 100ms;
   border-radius: 4px;
+  z-index: 98;
+  width: 25%;
+  height: 100%;
+  flex-shrink: 0;
 }
 
-.moviePoster__img {
-  min-width: 17vw;
-  min-height: 9vw;
-  background-position: center;
-  background-size: cover;
+.background-container {
+  width: 100%;
+  height: 100%;
+}
+
+.moviePoster__background {
+  width: 100%;
   border-radius: 4px;
 }
 
 .moviePoster:hover {
-  z-index: 50;
+  z-index: 99;
+  position: relative;
   transform: scale(1.1);
   left: 100;
 }
@@ -33,9 +38,13 @@
 .moviePoster__detail {
   background-color: #141414;
   font-size: 0.7em;
-  padding: 10px 15px;
   box-shadow: 0px 0px 18px 7px rgba(0, 0, 0, 0.6);
   border-radius: 0 0 4px 4px;
+  position: absolute;
+  width: 100%;
+}
+.detail-container {
+  padding: 10px 15px;
 }
 
 .btnMoviePoster {

@@ -1,16 +1,14 @@
 import requests from "../../requests";
-import "./moviePoster.css"
+import "./moviePoster.css";
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import PlayArrowIcon from "@mui/icons-material/PlayArrow"
-import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
-import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
-import ThumbDownAltOutlinedIcon from '@mui/icons-material/ThumbDownAltOutlined';
-import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
-import PlayCircleFilledWhiteRoundedIcon from '@mui/icons-material/PlayCircleFilledWhiteRounded';
-import styledEngine from "@mui/styled-engine";
-import AddIcon from '@mui/icons-material/Add';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
+import ThumbDownAltOutlinedIcon from "@mui/icons-material/ThumbDownAltOutlined";
+
+import AddIcon from "@mui/icons-material/Add";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { useWidthPartition } from "../../hooks/useWidthPartition";
 
 function MoviePoster({ movieId }) {
   const positionRef = useRef();
@@ -18,14 +16,18 @@ function MoviePoster({ movieId }) {
   const [isHover, setIsHover] = useState(false);
   const [movieDetail, setMovieDetail] = useState({
     loading: true,
-    data: {}
+    data: {},
   });
-  const [genres, setGenres] = useState([])
+  const [genres, setGenres] = useState([]);
   const API_KEY = process.env.REACT_APP_API_KEY;
 
   function countRuntime(n) {
-    return `${Math.floor(n / 60)}h ${n % 60}m`
+    return `${Math.floor(n / 60)}h ${n % 60}m`;
   }
+
+  const { posterNumberInOneView, currentWidth, posterWidth } =
+    useWidthPartition();
+  console.log(posterWidth);
 
   useEffect(() => {
     async function fetchData() {
@@ -33,29 +35,27 @@ function MoviePoster({ movieId }) {
       var request = await axios.get(`${requests.baseUrl}${movieDetailUrl}`);
       setMovieDetail({
         loading: false,
-        data: request.data
+        data: request.data,
       });
     }
     fetchData();
-  }, [])
+  }, []);
 
-  const getPosition = () => {
-
-  };
+  const getPosition = () => {};
 
   useEffect(() => {
     getPosition();
-  }, [])
+  }, []);
 
   const handleMouseEnter = () => {
     setIsHover(true);
-  }
+  };
 
   const handleMouseLeave = () => {
-    setIsHover(false)
-  }
+    setIsHover(false);
+  };
 
-  if (movieDetail.loading === true) return <div>sadasd</div>
+  if (movieDetail.loading === true) return <div>sadasd</div>;
   return (
     <div
       onMouseEnter={() => handleMouseEnter()}
@@ -63,40 +63,49 @@ function MoviePoster({ movieId }) {
       className="moviePoster"
       id={movieId}
       ref={positionRef}
+      style={{ width: posterWidth }}
     >
-      <div className="moviePoster__img" style={{
-        backgroundImage: `url(${requests.baseUrlImg}${movieDetail.data.backdrop_path})`
-      }}>
+      <div className="background-container">
+        <img
+          className="moviePoster__background"
+          src={`${requests.baseUrlImg}${movieDetail.data.backdrop_path}`}
+          alt="background movie"
+        />
       </div>
-      {
-        isHover && <div className="moviePoster__detail">
-          <div className="btns">
-            <div className="btns__left">
-              <PlayArrowIcon className="poster-icon-play btnMoviePoster" />
-              <AddIcon className="poster-icon-add btnMoviePoster" />
-              <ThumbUpOutlinedIcon className="poster-icon-like btnMoviePoster" />
-              <ThumbDownAltOutlinedIcon className="poster-icon-like btnMoviePoster" />
+      {isHover && (
+        <div className="moviePoster__detail">
+          <div className="detail-container">
+            <div className="btns">
+              <div className="btns__left">
+                <PlayArrowIcon className="poster-icon-play btnMoviePoster" />
+                <AddIcon className="poster-icon-add btnMoviePoster" />
+                <ThumbUpOutlinedIcon className="poster-icon-like btnMoviePoster" />
+                <ThumbDownAltOutlinedIcon className="poster-icon-like btnMoviePoster" />
+              </div>
+              <div className="btns__right">
+                <KeyboardArrowDownIcon className="poster-icon-dropdown btnMoviePoster" />
+              </div>
             </div>
-            <div className="btns__right">
-              <KeyboardArrowDownIcon className="poster-icon-dropdown btnMoviePoster" />
+            <div className="detail">
+              <span className="detail__rate">
+                {movieDetail.data.vote_average} rate
+              </span>
+              <span className="detail__lenght">
+                {countRuntime(movieDetail.data.runtime)}
+              </span>
             </div>
-          </div>
-          <div className="detail">
-            <span className="detail__rate">{movieDetail.data.vote_average} rate</span>
-            <span className="detail__lenght">{countRuntime(movieDetail.data.runtime)}</span>
-          </div>
-          <div >
-            <ul className="genres">
-              {movieDetail.data.genres.slice(0, 3).map(genres => (
-                <li key={genres.id}>{genres.name}</li>
-              ))}
-
-            </ul>
+            <div>
+              <ul className="genres">
+                {movieDetail.data.genres.slice(0, 3).map((genres) => (
+                  <li key={genres.id}>{genres.name}</li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
-      }
-    </div >
-  )
+      )}
+    </div>
+  );
 }
 
 export default MoviePoster;

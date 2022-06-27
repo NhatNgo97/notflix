@@ -1,14 +1,55 @@
 .movieRow {
-  margin-top: -12em;
-  margin-bottom: 12em;
-  margin-left: 4vw;
+  padding: 0 4vw;
+  transition: transform 300ms ease 100ms;
+  margin-bottom: 5em;
 }
 
 .movieRow__movies {
-  display: flex;
-  flex-direction: row;
 }
 
 .movieRow__title {
   color: white;
+}
+
+.slider-container {
+  position: relative;
+}
+
+.slider-indicator {
+  position: absolute;
+}
+
+.slider-handle {
+  position: absolute;
+  z-index: 100;
+  visibility: hidden;
+  background-color: rgba(20, 20, 20, 0.7);
+  height: 100%;
+  width: 4vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slider-handle:hover {
+  cursor: pointer;
+}
+
+.movieRow:hover .slider-handle {
+  visibility: visible;
+}
+
+.handle-next {
+  right: -4vw;
+  top: 0;
+}
+
+.handle-prev {
+  left: -4vw;
+}
+
+.slider {
+  white-space: nowrap;
+  display: flex;
+  transition: transform 400ms ease-in-out;
 }
