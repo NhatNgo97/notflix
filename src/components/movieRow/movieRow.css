@@ -1,7 +1,8 @@
 .movieRow {
   padding: 0 4vw;
+
   transition: transform 300ms ease 100ms;
-  margin-bottom: 5em;
+  margin-bottom: 8vw;
 }
 
 .movieRow__movies {
@@ -21,7 +22,7 @@
 
 .slider-handle {
   position: absolute;
-  z-index: 100;
+  z-index: 80;
   visibility: hidden;
   background-color: rgba(20, 20, 20, 0.7);
   height: 100%;
@@ -52,4 +53,9 @@
   white-space: nowrap;
   display: flex;
   transition: transform 400ms ease-in-out;
+}
+@media screen and (min-width: 1500px) {
+  .movieRow {
+    padding: 0 60px;
+  }
 }

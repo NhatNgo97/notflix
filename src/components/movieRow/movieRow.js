@@ -5,45 +5,24 @@ import "./movieRow.css";
 import Skeleton from "@mui/material/Skeleton";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import { useWidthPartition } from "../../hooks/useWidthPartition";
+import { useSlider } from "../../hooks/useSlider";
 
 function MovieRow({ title, fetchUrl }) {
-  const [sliderPage, setSliderPage] = useState(0);
-  const [hasPrev, setHasPrev] = useState(false);
-  const [hasNext, setHasNext] = useState(false);
   const API_KEY = process.env.REACT_APP_API_KEY;
-  const { posterNumberInOneView, currentWidth, posterWidth } =
-    useWidthPartition();
   const BASE_URL = `https://api.themoviedb.org/3/movie/`;
   const API_URL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`;
   const [movies, setMovies] = useState({
     loading: true,
     data: [],
   });
+  const { hasNext, hasPrev, distance, handlePaginate } = useSlider(movies);
+
   useEffect(() => {
     axios.get(`${BASE_URL}${fetchUrl}?api_key=${API_KEY}`).then((res) => {
       setMovies({ loading: false, data: res.data.results });
     });
   }, []);
 
-  useEffect(() => {
-    if (sliderPage <= 0) {
-      setHasPrev(false);
-    } else {
-      setHasPrev(true);
-    }
-    if (sliderPage >= Math.floor(movies.data.length / posterNumberInOneView)) {
-      setHasNext(false);
-    } else {
-      setHasNext(true);
-    }
-  }, [sliderPage]);
-
-  function handlePaginate(num) {
-    setSliderPage(parseInt(sliderPage + num));
-  }
-  const distance = "-" + parseInt(sliderPage * 100) + "%";
-  console.log(distance);
   return (
     <div className="movieRow">
       <div className="movieRow__title">{title}</div>

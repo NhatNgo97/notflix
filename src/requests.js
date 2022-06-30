@@ -7,6 +7,6 @@ const requests = {
   fetchActionMovies: `/discover/movie?api_key=${API_KEY}&with_genres=28`,
   baseUrlImg: `https://image.tmdb.org/t/p/original`,
   baseUrl: `https://api.themoviedb.org/3/movie/`,
-}
+};
 
 export default requests;

@@ -2,7 +2,7 @@
   padding: 0px 0.05vw;
   transition: transform 400ms ease-in-out 100ms;
   border-radius: 4px;
-  z-index: 98;
+  z-index: 97;
   width: 25%;
   height: 100%;
   flex-shrink: 0;
@@ -19,7 +19,7 @@
 }
 
 .moviePoster:hover {
-  z-index: 99;
+  z-index: 98;
   position: relative;
   transform: scale(1.1);
   left: 100;
@@ -29,6 +29,9 @@
   border-radius: 4px 4px 0 0;
 }
 
+.moviePoster:hover .moviePoster__detail {
+  z-index: 100;
+}
 .btns {
   display: flex;
   flex-direction: row;
@@ -42,6 +45,7 @@
   border-radius: 0 0 4px 4px;
   position: absolute;
   width: 100%;
+  z-index: 98;
 }
 .detail-container {
   padding: 10px 15px;

@@ -25,9 +25,7 @@ function MoviePoster({ movieId }) {
     return `${Math.floor(n / 60)}h ${n % 60}m`;
   }
 
-  const { posterNumberInOneView, currentWidth, posterWidth } =
-    useWidthPartition();
-  console.log(posterWidth);
+  const { posterWidth } = useWidthPartition();
 
   useEffect(() => {
     async function fetchData() {
@@ -55,7 +53,7 @@ function MoviePoster({ movieId }) {
     setIsHover(false);
   };
 
-  if (movieDetail.loading === true) return <div>sadasd</div>;
+  if (movieDetail.loading === true) return <div></div>;
   return (
     <div
       onMouseEnter={() => handleMouseEnter()}
