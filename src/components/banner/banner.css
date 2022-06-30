@@ -32,10 +32,35 @@
 }
 
 .banner__text {
+  width: 100%;
   margin-left: 4vw;
-  max-width: 40%;
   position: relative;
   top: 30%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.banner__text-left {
+  max-width: 40%;
+}
+
+.banner__right-buttons {
+  position: relative;
+  top: 28%;
+  right: 4vw;
+}
+
+.banner__right-button {
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  width: 2.5vw;
+  height: 2.5vw;
+}
+
+.banner__right-button:hover {
+  background-color: #ffffff;
+  cursor: pointer;
+  color: #000000;
 }
 
 .banner__text__title {

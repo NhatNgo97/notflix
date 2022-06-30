@@ -5,25 +5,17 @@ import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import ReactPlayer from "react-player";
 import requests from "../../requests";
+import VolumeUpIcon from "@mui/icons-material/VolumeUp";
+import VolumeOffIcon from "@mui/icons-material/VolumeOff";
 
 function Banner() {
   const API_KEY = process.env.REACT_APP_API_KEY;
   const API_URL = `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}&language=en-US&page=1`;
   const [movie, setMovie] = useState();
   const [trailerUrl, setTrailerUrl] = useState();
+  const [isTrailerMuted, setIsTrailerMuted] = useState(true);
 
-  function handleVideoReady(e) {
-    console.log(e.target);
-    e.target.playVideo();
-  }
-  const opts = {
-    height: "100%",
-    width: "100%",
-    playerVars: {
-      autoplay: 1,
-      origin: "http://localhost:3000/home",
-    },
-  };
+  function onStartVideo() {}
 
   useEffect(() => {
     axios
@@ -49,7 +41,9 @@ function Banner() {
         (item) => item.type === "Trailer"
       );
       const trailerKey = request.data.results[trailerIndex].key;
-      setTrailerUrl("https://www.youtube.com/watch?v=" + trailerKey);
+      setTrailerUrl(
+        "https://www.youtube.com/watch?v=" + trailerKey + "?autoplay=1"
+      );
     }
   }, [movie]);
 
@@ -64,23 +58,51 @@ function Banner() {
             alt="banner-background"
           />
           {trailerUrl && (
-            <ReactPlayer width="100%" height="100%" url={trailerUrl} playing />
+            <ReactPlayer
+              width="100%"
+              height="100%"
+              url={trailerUrl}
+              muted={isTrailerMuted}
+              playing
+            />
           )}
         </div>
         <div className="banner__text">
-          <h1 className="banner__text__title">{movie.original_title}</h1>
-          <div className="banner__text__desc">
-            {truncate(movie?.overview, 150)}
+          <div className="banner__text-left">
+            <h1 className="banner__text__title">{movie.original_title}</h1>
+            <div className="banner__text__desc">
+              {truncate(movie?.overview, 150)}
+            </div>
+            <div className="banner__text__btns">
+              <button className="banner__text__btn play__btn">
+                <PlayArrowRoundedIcon className="btn__icon" />
+                <span>Play</span>
+              </button>
+              <button className="banner__text__btn info__btn">
+                <InfoOutlinedIcon className="btn__icon" />
+                <span>More Info</span>
+              </button>
+            </div>
           </div>
-          <div className="banner__text__btns">
-            <button className="banner__text__btn play__btn">
-              <PlayArrowRoundedIcon className="btn__icon" />
-              <span>Play</span>
-            </button>
-            <button className="banner__text__btn info__btn">
-              <InfoOutlinedIcon className="btn__icon" />
-              <span>More Info</span>
-            </button>
+          <div className="banner__text-right">
+            <div className="banner__right-buttons">
+              {isTrailerMuted === false && (
+                <div onClick={() => setIsTrailerMuted(!isTrailerMuted)}>
+                  <VolumeUpIcon
+                    fontSize="large"
+                    className="banner__right-button"
+                  />
+                </div>
+              )}
+              {isTrailerMuted === true && (
+                <div onClick={() => setIsTrailerMuted(!isTrailerMuted)}>
+                  <VolumeOffIcon
+                    fontSize="large"
+                    className="banner__right-button"
+                  />
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
