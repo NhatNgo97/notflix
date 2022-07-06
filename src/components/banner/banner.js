@@ -7,15 +7,13 @@ import ReactPlayer from "react-player";
 import requests from "../../requests";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import VolumeOffIcon from "@mui/icons-material/VolumeOff";
+import PosterBackground from "../PosterBackground/PosterBackground";
 
 function Banner() {
   const API_KEY = process.env.REACT_APP_API_KEY;
   const API_URL = `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}&language=en-US&page=1`;
   const [movie, setMovie] = useState();
-  const [trailerUrl, setTrailerUrl] = useState();
   const [isTrailerMuted, setIsTrailerMuted] = useState(true);
-
-  function onStartVideo() {}
 
   useEffect(() => {
     axios
@@ -32,41 +30,18 @@ function Banner() {
       });
   }, []);
 
-  useMemo(async () => {
-    if (movie !== undefined) {
-      const movieDetailUrl = `${movie.id}/videos?api_key=${API_KEY}`;
-      const request = await axios.get(`${requests.baseUrl}${movieDetailUrl}`);
-      console.log(request.data.results);
-      const trailerIndex = request.data.results.findIndex(
-        (item) => item.type === "Trailer"
-      );
-      const trailerKey = request.data.results[trailerIndex].key;
-      setTrailerUrl(
-        "https://www.youtube.com/watch?v=" + trailerKey + "?autoplay=1"
-      );
-    }
-  }, [movie]);
-
   if (movie === undefined) return <div>Loading..</div>;
   return (
     <div className="banner-container">
       <div className="banner">
-        <div className="banner__background">
-          <img
-            src={"https://image.tmdb.org/t/p/original/" + movie.backdrop_path}
-            className="background__img"
-            alt="banner-background"
+        {movie && (
+          <PosterBackground
+            isPlaying={true}
+            movie={movie}
+            isMuted={isTrailerMuted}
+            isAutoPlayed={true}
           />
-          {trailerUrl && (
-            <ReactPlayer
-              width="100%"
-              height="100%"
-              url={trailerUrl}
-              muted={isTrailerMuted}
-              playing
-            />
-          )}
-        </div>
+        )}
         <div className="banner__text">
           <div className="banner__text-left">
             <h1 className="banner__text__title">{movie.original_title}</h1>

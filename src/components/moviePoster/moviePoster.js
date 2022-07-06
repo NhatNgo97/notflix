@@ -5,26 +5,23 @@ import axios from "axios";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
 import ThumbDownAltOutlinedIcon from "@mui/icons-material/ThumbDownAltOutlined";
-
 import AddIcon from "@mui/icons-material/Add";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useWidthPartition } from "../../hooks/useWidthPartition";
+import PosterBackground from "../PosterBackground/PosterBackground";
 
 function MoviePoster({ movieId }) {
-  const positionRef = useRef();
-
   const [isHover, setIsHover] = useState(false);
+  const [delayHandler, setDelayHandler] = useState();
   const [movieDetail, setMovieDetail] = useState({
     loading: true,
     data: {},
   });
-  const [genres, setGenres] = useState([]);
   const API_KEY = process.env.REACT_APP_API_KEY;
 
   function countRuntime(n) {
     return `${Math.floor(n / 60)}h ${n % 60}m`;
   }
-
   const { posterWidth } = useWidthPartition();
 
   useEffect(() => {
@@ -39,17 +36,16 @@ function MoviePoster({ movieId }) {
     fetchData();
   }, []);
 
-  const getPosition = () => {};
-
-  useEffect(() => {
-    getPosition();
-  }, []);
-
   const handleMouseEnter = () => {
-    setIsHover(true);
+    setDelayHandler(
+      setTimeout(() => {
+        setIsHover(true);
+      }, 1000)
+    );
   };
 
   const handleMouseLeave = () => {
+    clearTimeout(delayHandler);
     setIsHover(false);
   };
 
@@ -60,15 +56,22 @@ function MoviePoster({ movieId }) {
       onMouseLeave={() => handleMouseLeave()}
       className="moviePoster"
       id={movieId}
-      ref={positionRef}
-      style={{ width: posterWidth }}
+      style={{
+        width: posterWidth,
+        transform: isHover ? "scale(1.4)" : "scale(1.0)",
+      }}
     >
       <div className="background-container">
-        <img
-          className="moviePoster__background"
-          src={`${requests.baseUrlImg}${movieDetail.data.backdrop_path}`}
-          alt="background movie"
-        />
+        {movieDetail && (
+          <PosterBackground
+            movie={movieDetail.data}
+            isMuted={true}
+            isPlaying={isHover}
+            style={{
+              position: "relative",
+            }}
+          />
+        )}
       </div>
       {isHover && (
         <div className="moviePoster__detail">

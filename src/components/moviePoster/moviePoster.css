@@ -1,11 +1,13 @@
 .moviePoster {
   padding: 0px 0.05vw;
-  transition: transform 400ms ease-in-out 100ms;
+  transition: transform 200ms ease-in-out 100ms;
   border-radius: 4px;
   z-index: 97;
   width: 25%;
   height: 100%;
   flex-shrink: 0;
+  aspect-ratio: 16/9;
+  cursor: pointer;
 }
 
 .background-container {
@@ -21,7 +23,6 @@
 .moviePoster:hover {
   z-index: 98;
   position: relative;
-  transform: scale(1.1);
   left: 100;
 }
 
