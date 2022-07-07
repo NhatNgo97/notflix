@@ -1,6 +1,6 @@
 import requests from "../../requests";
 import "./moviePoster.css";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import axios from "axios";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
@@ -9,6 +9,7 @@ import AddIcon from "@mui/icons-material/Add";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useWidthPartition } from "../../hooks/useWidthPartition";
 import PosterBackground from "../PosterBackground/PosterBackground";
+import { AppContext } from "../../contexts/AppProvider";
 
 function MoviePoster({ movieId }) {
   const [isHover, setIsHover] = useState(false);
@@ -17,6 +18,8 @@ function MoviePoster({ movieId }) {
     loading: true,
     data: {},
   });
+
+  const { setIsModalVisible } = useContext(AppContext);
   const API_KEY = process.env.REACT_APP_API_KEY;
 
   function countRuntime(n) {
@@ -47,6 +50,11 @@ function MoviePoster({ movieId }) {
   const handleMouseLeave = () => {
     clearTimeout(delayHandler);
     setIsHover(false);
+  };
+
+  const handleOpenModal = () => {
+    setIsHover(false);
+    setIsModalVisible(true);
   };
 
   if (movieDetail.loading === true) return <div></div>;
@@ -83,7 +91,7 @@ function MoviePoster({ movieId }) {
                 <ThumbUpOutlinedIcon className="poster-icon-like btnMoviePoster" />
                 <ThumbDownAltOutlinedIcon className="poster-icon-like btnMoviePoster" />
               </div>
-              <div className="btns__right">
+              <div onClick={handleOpenModal} className="btns__right">
                 <KeyboardArrowDownIcon className="poster-icon-dropdown btnMoviePoster" />
               </div>
             </div>
