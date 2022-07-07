@@ -10,9 +10,9 @@ function NavBar() {
   useEffect(() => {
     window.addEventListener("scroll", () => {
       if (window.scrollY > 80) {
-        setIsTopScroll(true);
-      } else {
         setIsTopScroll(false);
+      } else {
+        setIsTopScroll(true);
       }
     });
 
@@ -22,7 +22,8 @@ function NavBar() {
   }, []);
 
   var classes = clx("navBar", {
-    "navBar-trans": isTopScroll,
+    "navBar-trans": !isTopScroll,
+    "navBar-black": isTopScroll,
   });
   return (
     <div className={classes}>
