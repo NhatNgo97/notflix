@@ -34,8 +34,9 @@
 .banner__right-button {
   border-radius: 50%;
   border: 2px solid rgba(255, 255, 255, 0.7);
-  width: 2.5vw;
-  height: 2.5vw;
+  width: 5vw;
+  height: 5vw;
+  font-size: 50;
 }
 
 .banner__right-button:hover {
