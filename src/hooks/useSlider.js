@@ -20,7 +20,7 @@ export function useSlider(movies) {
       setHasNext(true);
     }
     setDistance("-" + parseInt(sliderPage * 100) + "%");
-  }, [sliderPage, movies]);
+  }, [sliderPage, movies, posterNumberInOneView]);
 
   function handlePaginate(num) {
     setSliderPage(parseInt(sliderPage + num));
