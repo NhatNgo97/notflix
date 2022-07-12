@@ -1,6 +1,6 @@
 import requests from "../../requests";
 import "./moviePoster.css";
-import { useState, useEffect, useRef, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
@@ -9,9 +9,10 @@ import AddIcon from "@mui/icons-material/Add";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useWidthPartition } from "../../hooks/useWidthPartition";
 import PosterBackground from "../PosterBackground/PosterBackground";
-import { AppContext } from "../../contexts/AppProvider";
+import { ModalContext } from "../../contexts/ModalProvider";
 
-function MoviePoster({ movieId }) {
+function MoviePoster({ movieId, tempBackdrop }) {
+  const API_KEY = process.env.REACT_APP_API_KEY;
   const [isHover, setIsHover] = useState(false);
   const [delayHandler, setDelayHandler] = useState();
   const [movieDetail, setMovieDetail] = useState({
@@ -19,8 +20,7 @@ function MoviePoster({ movieId }) {
     data: {},
   });
 
-  const { setIsModalVisible } = useContext(AppContext);
-  const API_KEY = process.env.REACT_APP_API_KEY;
+  const { setIsModalVisible, setMovieModal } = useContext(ModalContext);
 
   function countRuntime(n) {
     return `${Math.floor(n / 60)}h ${n % 60}m`;
@@ -28,16 +28,18 @@ function MoviePoster({ movieId }) {
   const { posterWidth } = useWidthPartition();
 
   useEffect(() => {
-    async function fetchData() {
-      const movieDetailUrl = `${movieId}?api_key=${API_KEY}&language=en-US&append_to_response=videos`;
-      var request = await axios.get(`${requests.baseUrl}${movieDetailUrl}`);
-      setMovieDetail({
-        loading: false,
-        data: request.data,
-      });
+    if (isHover) {
+      async function fetchData() {
+        const movieDetailUrl = `${movieId}?api_key=${API_KEY}&language=en-US&append_to_response=videos`;
+        var request = await axios.get(`${requests.baseUrl}${movieDetailUrl}`);
+        setMovieDetail({
+          loading: false,
+          data: request.data,
+        });
+      }
+      fetchData();
     }
-    fetchData();
-  }, []);
+  }, [isHover]);
 
   const handleMouseEnter = () => {
     setDelayHandler(
@@ -54,10 +56,11 @@ function MoviePoster({ movieId }) {
 
   const handleOpenModal = () => {
     setIsHover(false);
+    setMovieModal(movieDetail.data);
     setIsModalVisible(true);
   };
+  console.log(tempBackdrop);
 
-  if (movieDetail.loading === true) return <div></div>;
   return (
     <div
       onMouseEnter={() => handleMouseEnter()}
@@ -70,18 +73,17 @@ function MoviePoster({ movieId }) {
       }}
     >
       <div className="background-container">
-        {movieDetail && (
-          <PosterBackground
-            movie={movieDetail.data}
-            isMuted={true}
-            isPlaying={isHover}
-            style={{
-              position: "relative",
-            }}
-          />
-        )}
+        <PosterBackground
+          tempBackdrop={tempBackdrop}
+          movie={movieDetail}
+          isMuted={true}
+          isPlaying={isHover}
+          style={{
+            position: "relative",
+          }}
+        />
       </div>
-      {isHover && (
+      {movieDetail.loading === false && isHover && (
         <div className="moviePoster__detail">
           <div className="detail-container">
             <div className="btns">

@@ -1,16 +1,16 @@
 import { createContext, useState } from "react";
 
-export const AppContext = createContext();
+export const ModalContext = createContext();
 
-export default function AppProvider({ children }) {
+export default function ModalProvider({ children }) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [movieModal, setMovieModal] = useState({ loading: true, data: {} });
 
   return (
-    <AppContext.Provider
+    <ModalContext.Provider
       value={{ isModalVisible, movieModal, setIsModalVisible, setMovieModal }}
     >
       {children}
-    </AppContext.Provider>
+    </ModalContext.Provider>
   );
 }

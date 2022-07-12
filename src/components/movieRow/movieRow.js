@@ -44,7 +44,13 @@ function MovieRow({ title, fetchUrl }) {
           {!movies.loading ? (
             <>
               {movies.data.map((movie) => {
-                return <MoviePoster movieId={movie.id} key={movie.id} />;
+                return (
+                  <MoviePoster
+                    movieId={movie.id}
+                    key={movie.id}
+                    tempBackdrop={movie.backdrop_path}
+                  />
+                );
               })}
             </>
           ) : (
