@@ -6,11 +6,9 @@ import Skeleton from "@mui/material/Skeleton";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { useSlider } from "../../hooks/useSlider";
+import itemService from "../../services/item";
 
-function MovieRow({ title, fetchUrl }) {
-  const API_KEY = process.env.REACT_APP_API_KEY;
-  const BASE_URL = `https://api.themoviedb.org/3/movie/`;
-  const API_URL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`;
+function MovieRow({ mediaType, title, genreId, fetchUrl }) {
   const [movies, setMovies] = useState({
     loading: true,
     data: [],
@@ -18,9 +16,25 @@ function MovieRow({ title, fetchUrl }) {
   const { hasNext, hasPrev, distance, handlePaginate } = useSlider(movies);
 
   useEffect(() => {
-    axios.get(`${BASE_URL}${fetchUrl}?api_key=${API_KEY}`).then((res) => {
-      setMovies({ loading: false, data: res.data.results });
-    });
+    async function fetchList() {
+      let movieList;
+      if (title === "Trending") {
+        movieList = await itemService.getTrendingList({
+          mediaType: mediaType,
+        });
+      } else if (title === "Top Rated") {
+        movieList = await itemService.getTopRatedList({
+          mediaType: mediaType,
+        });
+      } else {
+        movieList = await itemService.getList({
+          mediaType: mediaType,
+          genreId: genreId,
+        });
+      }
+      setMovies({ loading: false, data: movieList.results });
+    }
+    fetchList();
   }, []);
 
   return (

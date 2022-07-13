@@ -10,6 +10,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useWidthPartition } from "../../hooks/useWidthPartition";
 import PosterBackground from "../PosterBackground/PosterBackground";
 import { ModalContext } from "../../contexts/ModalProvider";
+import { countRuntime } from "../../helpers";
 
 function MoviePoster({ movieId, tempBackdrop }) {
   const API_KEY = process.env.REACT_APP_API_KEY;
@@ -22,9 +23,6 @@ function MoviePoster({ movieId, tempBackdrop }) {
 
   const { setIsModalVisible, setMovieModal } = useContext(ModalContext);
 
-  function countRuntime(n) {
-    return `${Math.floor(n / 60)}h ${n % 60}m`;
-  }
   const { posterWidth } = useWidthPartition();
 
   useEffect(() => {
@@ -59,7 +57,6 @@ function MoviePoster({ movieId, tempBackdrop }) {
     setMovieModal(movieDetail.data);
     setIsModalVisible(true);
   };
-  console.log(tempBackdrop);
 
   return (
     <div
