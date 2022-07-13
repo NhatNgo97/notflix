@@ -12,7 +12,6 @@ function PosterBackground({
   isAutoPlayed = false,
   ...resProps
 }) {
-  console.log(tempBackdrop);
   const [backgroundOpacity, setBackgroundOpacity] = useState("1");
   const [isTrailerMuted, setIsTrailerMuted] = useState(true);
 
@@ -27,10 +26,9 @@ function PosterBackground({
     console.log(isTrailerMuted);
   }
 
-  const imgPath = movie.data?.backdrop_path;
   const trailerPath = movie.data?.videos?.results.find(
     (item) => item.type === "Trailer"
-  ).key;
+  )?.key;
   const TrailerUrl =
     "https://www.youtube.com/watch?v=" + trailerPath + "?autoplay=0";
 

@@ -1,11 +1,11 @@
 import { Box, Modal, Typography } from "@mui/material";
 import { useContext } from "react";
-import { AppContext } from "../../contexts/AppProvider";
+import { ModalContext } from "../../contexts/ModalProvider";
 import "./movie-modal.css";
 
 function MovieModal() {
   console.log("abc");
-  const { isModalVisible, setIsModalVisible } = useContext(AppContext);
+  const { isModalVisible, setIsModalVisible } = useContext(ModalContext);
 
   return (
     <Modal open={isModalVisible} onClose={() => setIsModalVisible(false)}>
