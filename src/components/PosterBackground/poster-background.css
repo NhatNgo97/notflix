@@ -1,13 +1,15 @@
 .poster__background {
   position: absolute;
-  z-index: -1;
+  z-index: 1;
   width: 100%;
   height: 100%;
+  object-fit: contain;
   top: 0px;
 }
 
 .poster__img {
   width: 100%;
+  height: 100%;
   position: absolute;
   transition: opacity 1.5s ease-in-out;
   opacity: 0;
@@ -15,7 +17,7 @@
 
 .poster__trailer {
   width: 100%;
-  z-index: -2;
+  z-index: 0;
   height: 100%;
 }
 
@@ -26,14 +28,14 @@
   right: 5%;
   border: 2px solid rgba(255, 255, 255, 0.7);
   background-color: transparent;
-  color: white;
+  color: rgba(255, 255, 255, 0.7);
   width: 50px;
   height: 50px;
+  z-index: 99999;
 }
 
 .mute__btn:hover {
-  background-color: black;
-  border-radius: 100%;
-  color: aliceblue;
-  border-radius: 0%;
+  background-color: #2a2a2a;
+  color: white;
+  border: 2px solid white;
 }

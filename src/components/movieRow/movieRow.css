@@ -1,10 +1,13 @@
 .movieRow {
   padding: 0 4vw;
-
+  position: relative;
   transition: transform 300ms ease 100ms;
   margin-bottom: 8vw;
 }
 
+.movieRow:hover {
+  z-index: 999;
+}
 .movieRow__movies {
 }
 

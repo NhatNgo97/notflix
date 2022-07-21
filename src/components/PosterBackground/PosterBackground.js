@@ -6,14 +6,14 @@ import "./poster-background.css";
 
 function PosterBackground({
   tempBackdrop,
-  isMuted,
-  movie,
+  trailerPath,
   isPlaying = false,
   isAutoPlayed = false,
   ...resProps
 }) {
   const [backgroundOpacity, setBackgroundOpacity] = useState("1");
   const [isTrailerMuted, setIsTrailerMuted] = useState(true);
+  console.log(trailerPath);
 
   function handleOnEnded() {
     setBackgroundOpacity("1");
@@ -23,14 +23,8 @@ function PosterBackground({
   }
 
   function handleMuteClick() {
-    console.log(isTrailerMuted);
+    setIsTrailerMuted(!isTrailerMuted);
   }
-
-  const trailerPath = movie.data?.videos?.results.find(
-    (item) => item.type === "Trailer"
-  )?.key;
-  const TrailerUrl =
-    "https://www.youtube.com/watch?v=" + trailerPath + "?autoplay=0";
 
   useEffect(() => {
     if (isAutoPlayed !== true) {
@@ -47,20 +41,24 @@ function PosterBackground({
         className="poster__img"
         alt="poster-background"
       />
-      {movie.loading === false && isPlaying && (
+      {isPlaying && (
         <>
           <ReactPlayer
             className="poster__trailer"
             width="100%"
             height="100%"
-            url={TrailerUrl}
+            url={trailerPath}
             muted={isTrailerMuted}
             playing={isPlaying}
             onEnded={handleOnEnded}
             onPlay={handleOnPlay}
           />
           <button className="mute__btn" onClick={handleMuteClick}>
-            <VolumeOffIcon className="fit-icon" fontSize="large" />
+            {isTrailerMuted ? (
+              <VolumeOffIcon className="fit-icon" fontSize="large" />
+            ) : (
+              <VolumeUpIcon className="fit-icon" fontSize="large" />
+            )}
           </button>
         </>
       )}

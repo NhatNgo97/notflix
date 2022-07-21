@@ -3,14 +3,16 @@ import "./banner.css";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import PosterBackground from "../PosterBackground/PosterBackground";
-import { truncate } from "../../helpers";
+import { getMovieTrailerPath, truncate } from "../../helpers";
 import itemService from "../../services/item";
+import VolumeOff from "@mui/icons-material/VolumeOff";
 
-function Banner() {
+function Banner({ isDescriptionIncluded = true }) {
   const [movieBanner, setMovieBanner] = useState({
     loading: true,
     data: {},
   });
+
   useEffect(() => {
     async function getBannerAPI() {
       try {
@@ -26,14 +28,17 @@ function Banner() {
     }
     getBannerAPI();
   }, []);
+
+  const trailerPath = getMovieTrailerPath(movieBanner.data);
+
   return (
     <div className="banner-container">
       <div className="banner">
         {movieBanner.loading === false && (
           <PosterBackground
+            trailerPath={trailerPath}
             tempBackdrop={movieBanner?.data?.backdrop_path}
             isPlaying={true}
-            movie={movieBanner}
             isAutoPlayed={true}
           />
         )}
@@ -42,9 +47,11 @@ function Banner() {
             <h1 className="banner__text__title">
               {movieBanner?.data?.original_title}
             </h1>
-            <div className="banner__text__desc">
-              {truncate(movieBanner?.data?.overview, 150)}
-            </div>
+            {isDescriptionIncluded && (
+              <div className="banner__text__desc">
+                {truncate(movieBanner?.data?.overview, 150)}
+              </div>
+            )}
             <div className="banner__text__btns">
               <button className="banner__text__btn play__btn">
                 <PlayArrowRoundedIcon className="btn__icon" />

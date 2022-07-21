@@ -10,7 +10,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useWidthPartition } from "../../hooks/useWidthPartition";
 import PosterBackground from "../PosterBackground/PosterBackground";
 import { ModalContext } from "../../contexts/ModalProvider";
-import { countRuntime } from "../../helpers";
+import { countRuntime, getMovieTrailerPath } from "../../helpers";
 
 function MoviePoster({ movieId, tempBackdrop }) {
   const API_KEY = process.env.REACT_APP_API_KEY;
@@ -26,9 +26,9 @@ function MoviePoster({ movieId, tempBackdrop }) {
   const { posterWidth } = useWidthPartition();
 
   useEffect(() => {
-    if (isHover) {
+    if (isHover && movieDetail.loading === true) {
       async function fetchData() {
-        const movieDetailUrl = `${movieId}?api_key=${API_KEY}&language=en-US&append_to_response=videos`;
+        const movieDetailUrl = `${movieId}?api_key=${API_KEY}&language=en-US&append_to_response=videos,credits`;
         var request = await axios.get(`${requests.baseUrl}${movieDetailUrl}`);
         setMovieDetail({
           loading: false,
@@ -54,9 +54,11 @@ function MoviePoster({ movieId, tempBackdrop }) {
 
   const handleOpenModal = () => {
     setIsHover(false);
-    setMovieModal(movieDetail.data);
+    setMovieModal(movieDetail);
     setIsModalVisible(true);
   };
+
+  const trailerPath = getMovieTrailerPath(movieDetail.data);
 
   return (
     <div
@@ -71,9 +73,8 @@ function MoviePoster({ movieId, tempBackdrop }) {
     >
       <div className="background-container">
         <PosterBackground
+          trailerPath={trailerPath}
           tempBackdrop={tempBackdrop}
-          movie={movieDetail}
-          isMuted={true}
           isPlaying={isHover}
           style={{
             position: "relative",

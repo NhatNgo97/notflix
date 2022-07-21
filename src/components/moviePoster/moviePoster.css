@@ -21,7 +21,7 @@
 }
 
 .moviePoster:hover {
-  z-index: 98;
+  z-index: 100;
   position: relative;
   left: 100;
 }

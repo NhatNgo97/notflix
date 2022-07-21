@@ -1,6 +1,8 @@
 .banner-container {
   width: 100%;
   position: relative;
+  z-index: 0;
+  margin-bottom: -10vw;
 }
 
 .banner {
@@ -13,16 +15,17 @@
 }
 
 .banner__text {
-  width: 100%;
+  width: 50%;
   margin-left: 4vw;
   position: relative;
   top: 30%;
   display: flex;
   justify-content: space-between;
+  z-index: 3;
+  overflow: unset;
 }
 
 .banner__text-left {
-  max-width: 40%;
 }
 
 .banner__right-buttons {
