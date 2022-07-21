@@ -51,6 +51,15 @@ const itemService = {
     });
     return response.data;
   },
+  async getRecommend({ mediaType, id }) {
+    const response = await api.get(`/${mediaType}/${id}/recommendations`, {
+      params: {
+        api_key: API_KEY,
+        language: "eu-US",
+      },
+    });
+    return response.data;
+  },
 };
 
 export default itemService;

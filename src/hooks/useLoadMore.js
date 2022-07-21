@@ -4,12 +4,9 @@ export function useLoadMore(list) {
   const [currentIndexRow, setCurrentIndexRow] = useState(0);
   const [currentRowList, setCurrentRowList] = useState([]);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
 
-  console.log("re-render");
   useEffect(() => {
     const onScroll = () => {
-      setScrollY(window.scrollY);
       if (
         window.scrollY >
           document.body.offsetHeight - window.innerHeight - 400 &&
@@ -32,7 +29,6 @@ export function useLoadMore(list) {
   }, [currentIndexRow]);
 
   return {
-    scrollY,
     currentIndexRow,
     currentRowList,
     setCurrentRowList,

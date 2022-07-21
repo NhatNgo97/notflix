@@ -9,7 +9,6 @@ import { useLoadMore } from "../../hooks/useLoadMore";
 function Home() {
   const { mediaType, genreList } = useContext(GenresContext);
   const { currentRowList } = useLoadMore(genreList.movieGenres);
-  console.log("home");
   return (
     <div>
       <Banner />
