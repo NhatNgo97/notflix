@@ -1,5 +1,4 @@
 function ModalAbout({ about }) {
-  console.log(about);
   return (
     <div className="modal__about">
       <h2>About </h2>

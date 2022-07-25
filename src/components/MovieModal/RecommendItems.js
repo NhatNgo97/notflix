@@ -17,7 +17,6 @@ function RecommendItems({ id }) {
     }
     fetchRecommendList();
   }, []);
-  console.log(recommendList[0]);
 
   if (recommendList.length === 0) return <div>a</div>;
   return (

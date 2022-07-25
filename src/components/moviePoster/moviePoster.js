@@ -33,7 +33,6 @@ function MoviePoster({ movieId, tempBackdrop, movieTitle }) {
           mediaType: mediaType,
           id: movieId,
         });
-        console.log(data);
         setMovieDetail({
           loading: false,
           data: data,

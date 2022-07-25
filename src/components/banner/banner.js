@@ -17,7 +17,6 @@ function Banner({ isDescriptionIncluded = true }) {
     async function getBannerAPI() {
       try {
         const movie = await itemService.getBanner({ mediaType: "movie" });
-        console.log(movie);
         setMovieBanner({
           loading: false,
           data: movie,

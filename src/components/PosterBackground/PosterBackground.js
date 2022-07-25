@@ -14,7 +14,6 @@ function PosterBackground({
 }) {
   const [backgroundOpacity, setBackgroundOpacity] = useState("1");
   const [isTrailerMuted, setIsTrailerMuted] = useState(true);
-  console.log(trailerPath);
 
   function handleOnEnded() {
     setBackgroundOpacity("1");

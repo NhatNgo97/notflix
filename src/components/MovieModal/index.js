@@ -1,4 +1,4 @@
-import { Box, Modal, Typography } from "@mui/material";
+import { Modal } from "@mui/material";
 import { useContext } from "react";
 import { GenresContext } from "../../contexts/GenresProvider";
 import { ModalContext } from "../../contexts/ModalProvider";

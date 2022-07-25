@@ -34,7 +34,6 @@ function MovieRow({ mediaType, title, genreId }) {
       setMovies({ loading: false, data: movieList.results });
     }
     fetchList();
-    console.log(movies.data);
   }, []);
 
   return (
