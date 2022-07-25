@@ -50,6 +50,11 @@
   justify-content: space-between;
 }
 
+.btns__left {
+  display: flex;
+  justify-content: space-around;
+  width: 60%;
+}
 .moviePoster__detail {
   background-color: #141414;
   font-size: 0.7em;

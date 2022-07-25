@@ -5,7 +5,7 @@ import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import PosterBackground from "../PosterBackground/PosterBackground";
 import { getMovieTrailerPath, truncate } from "../../helpers";
 import itemService from "../../services/item";
-import VolumeOff from "@mui/icons-material/VolumeOff";
+import Button from "../Shared/Button/Button";
 
 function Banner({ isDescriptionIncluded = true }) {
   const [movieBanner, setMovieBanner] = useState({
@@ -53,14 +53,16 @@ function Banner({ isDescriptionIncluded = true }) {
               </div>
             )}
             <div className="banner__text__btns">
-              <button className="banner__text__btn play__btn">
-                <PlayArrowRoundedIcon className="btn__icon" />
+              <Button isPlayBtn hasLabel>
+                <PlayArrowRoundedIcon />
+                &nbsp;
                 <span>Play</span>
-              </button>
-              <button className="banner__text__btn info__btn">
-                <InfoOutlinedIcon className="btn__icon" />
+              </Button>
+              <Button isGreyBtn hasLabel>
+                <InfoOutlinedIcon />
+                &nbsp;
                 <span>More Info</span>
-              </button>
+              </Button>
             </div>
           </div>
         </div>

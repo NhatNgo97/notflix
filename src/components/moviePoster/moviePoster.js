@@ -11,6 +11,7 @@ import { ModalContext } from "../../contexts/ModalProvider";
 import { countRuntime, getMovieTrailerPath } from "../../helpers";
 import { GenresContext } from "../../contexts/GenresProvider";
 import itemService from "../../services/item";
+import Button from "../Shared/Button/Button";
 
 function MoviePoster({ movieId, tempBackdrop, movieTitle }) {
   const [isHover, setIsHover] = useState(false);
@@ -90,13 +91,23 @@ function MoviePoster({ movieId, tempBackdrop, movieTitle }) {
           <div className="detail-container">
             <div className="btns">
               <div className="btns__left">
-                <PlayArrowIcon className="poster-icon-play btnMoviePoster" />
-                <AddIcon className="poster-icon-add btnMoviePoster" />
-                <ThumbUpOutlinedIcon className="poster-icon-like btnMoviePoster" />
-                <ThumbDownAltOutlinedIcon className="poster-icon-like btnMoviePoster" />
+                <Button isPlayBtn isRoundBtn>
+                  <PlayArrowIcon />
+                </Button>
+                <Button isRoundBtn>
+                  <AddIcon />
+                </Button>
+                <Button isRoundBtn>
+                  <ThumbUpOutlinedIcon />
+                </Button>
+                <Button isRoundBtn>
+                  <ThumbDownAltOutlinedIcon />
+                </Button>
               </div>
               <div onClick={handleOpenModal} className="btns__right">
-                <KeyboardArrowDownIcon className="poster-icon-dropdown btnMoviePoster" />
+                <Button isRoundBtn>
+                  <KeyboardArrowDownIcon />
+                </Button>
               </div>
             </div>
             <div className="detail">

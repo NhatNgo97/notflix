@@ -46,6 +46,12 @@
   max-width: 65%;
 }
 
+.info-resolution {
+  border: 1px solid white;
+  background-color: #181818;
+  padding: 1px 2px;
+}
+
 .modal__info-right {
   max-width: 25%;
 }
@@ -91,7 +97,15 @@
   display: flex;
   justify-content: space-between;
 }
-
+.recommend__content__header-left {
+  display: flex;
+  flex-direction: column;
+}
+.recommend__content__header-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .about__cast {
   margin: 1em auto;
 }
@@ -103,4 +117,8 @@
 
 .credit__title {
   color: grey;
+}
+
+.rate {
+  color: #46d369;
 }

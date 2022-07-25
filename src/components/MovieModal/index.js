@@ -51,16 +51,19 @@ function MovieModal() {
           <div className="modal__infos">
             <div className="modal__info-left modal__info">
               <div className="modal__info__general">
-                <span className="info-vote">
+                <span className="info-rate rate">
                   {movieModal.data.vote_average} Rate
                 </span>
+                &nbsp;
                 <span className="info-year">
                   {movieModal.data.release_date}{" "}
                 </span>
+                &nbsp;
+                <span className="info-resolution">HD</span>
+                &nbsp;
                 <span className="info-season">
                   {countRuntime(movieModal.data.runtime)}{" "}
                 </span>
-                <span className="info-HD">HD</span>
               </div>
               <p className="modal__info__description">
                 {movieModal.data.overview}

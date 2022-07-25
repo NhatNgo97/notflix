@@ -3,6 +3,7 @@ import ReactPlayer from "react-player";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import VolumeOffIcon from "@mui/icons-material/VolumeOff";
 import "./poster-background.css";
+import Button from "../Shared/Button/Button";
 
 function PosterBackground({
   tempBackdrop,
@@ -53,13 +54,15 @@ function PosterBackground({
             onEnded={handleOnEnded}
             onPlay={handleOnPlay}
           />
-          <button className="mute__btn" onClick={handleMuteClick}>
-            {isTrailerMuted ? (
-              <VolumeOffIcon className="fit-icon" fontSize="large" />
-            ) : (
-              <VolumeUpIcon className="fit-icon" fontSize="large" />
-            )}
-          </button>
+          <div className="mute__btn">
+            <Button isRoundBtn onClick={handleMuteClick}>
+              {isTrailerMuted ? (
+                <VolumeOffIcon className="fit-icon" fontSize="large" />
+              ) : (
+                <VolumeUpIcon className="fit-icon" fontSize="large" />
+              )}
+            </Button>
+          </div>
         </>
       )}
     </div>
