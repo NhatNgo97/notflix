@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import { GenresContext } from "../../contexts/GenresProvider";
-import { ModalContext } from "../../contexts/ModalProvider";
 import itemService from "../../services/item";
 import RecommendItem from "./RecommendItem";
 
@@ -28,6 +27,7 @@ function RecommendItems({ id }) {
         {recommendList.slice(0, 12).map((item) => {
           return (
             <RecommendItem
+              key={item.id}
               backdrop={item.backdrop_path}
               rate={item.vote_average}
               year={item.release_date}

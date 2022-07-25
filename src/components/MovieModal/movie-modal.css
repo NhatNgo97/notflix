@@ -85,7 +85,7 @@
   width: 100%;
 }
 .recommend__content {
-  padding: 0.5em 5%;
+  padding: 0 5%;
 }
 .recommend__content__header {
   display: flex;

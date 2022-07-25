@@ -20,9 +20,7 @@ function RecommendItem({ backdrop, rate, year, description, name }) {
             <button> +</button>
           </div>
         </div>
-        <div className="recommend__content__desc">
-          {truncate(description, 120)}
-        </div>
+        <p className="recommend__content__desc">{truncate(description, 120)}</p>
       </div>
     </div>
   );

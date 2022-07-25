@@ -7,7 +7,7 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { useSlider } from "../../hooks/useSlider";
 import itemService from "../../services/item";
 
-function MovieRow({ mediaType, title, genreId, fetchUrl }) {
+function MovieRow({ mediaType, title, genreId }) {
   const [movies, setMovies] = useState({
     loading: true,
     data: [],
@@ -34,11 +34,12 @@ function MovieRow({ mediaType, title, genreId, fetchUrl }) {
       setMovies({ loading: false, data: movieList.results });
     }
     fetchList();
+    console.log(movies.data);
   }, []);
 
   return (
     <div className="movieRow">
-      <div className="movieRow__title">{title}</div>
+      <h3 className="movieRow__title">{title}</h3>
 
       <div className="movieRow__slider slider-container">
         {hasPrev && (
@@ -62,6 +63,7 @@ function MovieRow({ mediaType, title, genreId, fetchUrl }) {
                     movieId={movie.id}
                     key={movie.id}
                     tempBackdrop={movie.backdrop_path}
+                    movieTitle={movie.original_title}
                   />
                 );
               })}

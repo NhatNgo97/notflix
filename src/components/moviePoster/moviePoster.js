@@ -1,7 +1,5 @@
-import requests from "../../requests";
 import "./moviePoster.css";
 import { useState, useEffect, useContext } from "react";
-import axios from "axios";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
 import ThumbDownAltOutlinedIcon from "@mui/icons-material/ThumbDownAltOutlined";
@@ -11,9 +9,10 @@ import { useWidthPartition } from "../../hooks/useWidthPartition";
 import PosterBackground from "../PosterBackground/PosterBackground";
 import { ModalContext } from "../../contexts/ModalProvider";
 import { countRuntime, getMovieTrailerPath } from "../../helpers";
+import { GenresContext } from "../../contexts/GenresProvider";
+import itemService from "../../services/item";
 
-function MoviePoster({ movieId, tempBackdrop }) {
-  const API_KEY = process.env.REACT_APP_API_KEY;
+function MoviePoster({ movieId, tempBackdrop, movieTitle }) {
   const [isHover, setIsHover] = useState(false);
   const [delayHandler, setDelayHandler] = useState();
   const [movieDetail, setMovieDetail] = useState({
@@ -24,15 +23,19 @@ function MoviePoster({ movieId, tempBackdrop }) {
   const { setIsModalVisible, setMovieModal } = useContext(ModalContext);
 
   const { posterWidth } = useWidthPartition();
+  const { mediaType } = useContext(GenresContext);
 
   useEffect(() => {
     if (isHover && movieDetail.loading === true) {
       async function fetchData() {
-        const movieDetailUrl = `${movieId}?api_key=${API_KEY}&language=en-US&append_to_response=videos,credits`;
-        var request = await axios.get(`${requests.baseUrl}${movieDetailUrl}`);
+        const data = await itemService.getMovieDetail({
+          mediaType: mediaType,
+          id: movieId,
+        });
+        console.log(data);
         setMovieDetail({
           loading: false,
-          data: request.data,
+          data: data,
         });
       }
       fetchData();
@@ -80,6 +83,7 @@ function MoviePoster({ movieId, tempBackdrop }) {
             position: "relative",
           }}
         />
+        <h3 className="poster__title">{movieTitle}</h3>
       </div>
       {movieDetail.loading === false && isHover && (
         <div className="moviePoster__detail">

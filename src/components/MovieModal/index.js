@@ -62,9 +62,9 @@ function MovieModal() {
                 </span>
                 <span className="info-HD">HD</span>
               </div>
-              <div className="modal__info__description">
+              <p className="modal__info__description">
                 {movieModal.data.overview}
-              </div>
+              </p>
             </div>
             <div className="modal__info-right modal__info">
               <div className="modal__info_cast">
@@ -93,7 +93,7 @@ function MovieModal() {
                 })}
                 {credit?.genres?.length > 4 && (
                   <span className="credits">
-                    <a> , more</a>
+                    <a> , more</a>s
                   </span>
                 )}
               </div>

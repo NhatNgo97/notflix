@@ -60,6 +60,16 @@ const itemService = {
     });
     return response.data;
   },
+  async getMovieDetail({ mediaType, id }) {
+    const response = await api.get(`/${mediaType}/${id}`, {
+      params: {
+        language: "en-US",
+        api_key: API_KEY,
+        append_to_response: "videos,credits",
+      },
+    });
+    return response.data;
+  },
 };
 
 export default itemService;

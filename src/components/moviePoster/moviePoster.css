@@ -13,11 +13,19 @@
 .background-container {
   width: 100%;
   height: 100%;
+  position: relative;
 }
 
 .moviePoster__background {
   width: 100%;
   border-radius: 4px;
+}
+
+.poster__title {
+  position: absolute;
+  bottom: -3px;
+  left: 1em;
+  z-index: 5;
 }
 
 .moviePoster:hover {
