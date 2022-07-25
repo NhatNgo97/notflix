@@ -6,7 +6,6 @@
 }
 
 .navBar {
-  background-color: #141414;
   z-index: 999;
   top: 0;
   height: 8vw;
@@ -15,4 +14,16 @@
   position: fixed;
   display: flex;
   align-items: center;
+}
+
+.navBar-black {
+  background-color: rgb(20, 20, 20);
+}
+
+.navBar-trans {
+  background-image: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.7) 10%,
+    transparent
+  );
 }

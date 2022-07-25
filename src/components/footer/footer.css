@@ -1,12 +1,11 @@
 .footer {
   padding-left: 12vw;
   padding-right: 12vw;
-  margin-top: -12em;
   display: flex;
   flex-direction: column;
   justify-content: center;
   color: #808080;
-  font-size: 0.8em;
+  font-size: large;
 }
 
 .iconFooter {
