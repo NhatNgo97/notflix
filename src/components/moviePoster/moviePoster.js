@@ -83,7 +83,7 @@ function MoviePoster({ movieId, tempBackdrop, movieTitle }) {
             position: "relative",
           }}
         />
-        <h3 className="poster__title">{movieTitle}</h3>
+        <h4 className="poster__title">{movieTitle}</h4>
       </div>
       {movieDetail.loading === false && isHover && (
         <div className="moviePoster__detail">

@@ -26,6 +26,9 @@
   bottom: -3px;
   left: 1em;
   z-index: 5;
+  max-width: 100%;
+  word-wrap: break-word;
+  white-space: normal;
 }
 
 .moviePoster:hover {
