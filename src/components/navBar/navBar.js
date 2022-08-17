@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router";
 import clx from "classnames";
 import { useEffect, useState } from "react";
+import Logo from "../../assets/notfliximg.png";
 
 import "./navBar.css";
 
@@ -27,11 +28,7 @@ function NavBar() {
   });
   return (
     <div className={classes}>
-      <img
-        className="navBar__logo"
-        src="https://fontmeme.com/permalink/220212/2b79b3189fcc6673d3153dee728478eb.png"
-        alt="logo"
-      />
+      <img className="navBar__logo" src={Logo} alt="logo" />
     </div>
   );
 }
